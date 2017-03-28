@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- stable
+- 6
+- 5
+- 4
+after_script: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+deploy:
+  provider: npm
+  email: ktutnik@gmail.com
+  on:
+    tags: true
+  api_key:
+    secure: jqAAAigXkRd5JDc1yTPg3xMcyXO7UI1lAmmYjSOBDlhTTVtmdpc+w1KsKTT8Eb8LygVnRbppi/Tu0avofL9zog5CWaLeEwrSoE6NxS5+B0nOGmaOSAmMnv4KDD5mT1LqO8SIrn5K135c1asMr8Tv5JE95MCZQbuwCA1NYJOnl3J6RajT72W/KKgakywzmj7qnZt2QVAZJkqNAfKiHNQjVNyNO/543lKMPVR9wmwDQdfT1sLf4wuzUpw6ckal7kJtCgTH+QFR793Ell7A6i4WnFQ6N1zU9mNuU19VjPKhQmrpAcaz7YPVjaRvWGHnN2FZas7bnigQhs5Ro8h4LyZV+QMT3o2evvFdV5lln+6x079CEjNQvsUiOQqD202yiqQj/Aja75AmX4mcRJ9TVngGG+jQQ9wV3yJzjqyzi/eUCiG51QoWmwvoB3gw3CTVdJAgN5cajuMxqKPPNQxbRjk+E9X7KXoyslFPlogOYGKBO9/BwpG8zpJ1OlmhIlLEgEGrRgI/Zs1d/Z1DRGwYh0UlhizWxK81pUQrhBg84piFndcj6viKdgn6IGKjwlMCWfjbSKU1gho9p6ePcxsVYsSu4SkSOE8PKQE4vNmpNBD6t6ErOYBa82YJ78g6BwnjK5n0+YKC7bFP8fOnYSQ4h2jUetDtnG3FxO3Weu70NTOZVeM=
