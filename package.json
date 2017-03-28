@@ -7,7 +7,9 @@
     "kamboja": "lib/source/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp",
+    "preversion": "gulp",
+    "postversion": "git push origin master && git push origin master --tags"
   },
   "repository": {
     "type": "git",
