@@ -19,14 +19,14 @@ class FileHelperMock implements FileHelper {
 }
 
 describe("init", () => {
-    it("Should download and unzip properly", function () {
-        this.timeout(8000)
+    it("Should download and unzip properly", async function () {
+        this.timeout(18000)
         let fileHelper = H.spy(new FileHelperMock())
         let init = new Init(fileHelper)
-        return init.init("basic", __dirname).then(() => {
-            Chai.expect(fileHelper.mocks.exists.called).true
-            Chai.expect(fileHelper.mocks.mkdir.called).true
-            Chai.expect(fileHelper.mocks.writeFile.called).true
-        })
+        await init.init("basic", __dirname)
+
+        Chai.expect(fileHelper.mocks.exists.called).true
+        Chai.expect(fileHelper.mocks.mkdir.called).true
+        Chai.expect(fileHelper.mocks.writeFile.called).true
     })
 })

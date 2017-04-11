@@ -3,18 +3,37 @@
 import * as Program from "commander"
 import { Init } from "./init"
 import { FileHelperImpl } from "./file-helper"
+import { VersionChecker } from "./version-checker"
+import { StarterList } from "./starter-list"
+import * as PkgInfo from "pkginfo"
+import * as LatestVersion from "latest-version"
+
+PkgInfo(module)
+let CURRENT_VERSION = module.exports.version
+let PACKAGE_NAME = module.exports.name
 
 Program
-    .version("0.0.1")
+    .version(CURRENT_VERSION);
 
 Program
     .command("init [name]")
     .description("init KambojaJs project using predefined starter")
-    .option("-ls", "show list of remote starter projects")
     .action((name, options) => {
-        let init = new Init(new FileHelperImpl())
-        if(!name) name = "basic"
-        init.init(name, process.cwd())
-    })
+        if (!name) {
+            let starters = new StarterList()
+            starters.render();
+        }
+        else {
+            let init = new Init(new FileHelperImpl())
+            if (!name) name = "basic"
+            init.init(name, process.cwd())
+        }
+    });
 
-Program.parse(process.argv)
+(async () => {
+    let checker = new VersionChecker(LatestVersion)
+    await checker.render(CURRENT_VERSION)
+    Program.parse(process.argv)
+})()
+
+
